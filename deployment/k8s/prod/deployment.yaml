@@ -1,0 +1,61 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: solr
+    appMajor: "5"
+    instance: drupal.solr.lib.unb.ca
+    tier: database
+    uri: drupal.solr.lib.unb.ca
+    vcsOwner: unb-libraries
+    vcsRepository: solr.lib.unb.ca
+    vcsRef: prod
+  name: drupal-solr-lib-unb-ca
+  namespace: prod
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: solr
+        appMajor: "5"
+        instance: drupal.solr.lib.unb.ca
+        tier: database
+        uri: drupal.solr.lib.unb.ca
+        vcsOwner: unb-libraries
+        vcsRepository: solr.lib.unb.ca
+        vcsRef: prod
+    spec:
+      containers:
+        -
+          env:
+            -
+              name: SOLR_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: solr
+                  key: root-password
+          image: "||DEPLOYMENTIMAGE||"
+          imagePullPolicy: Always
+          name: drupal-solr-lib-unb-ca
+          ports:
+            -
+              containerPort: 8983
+              name: solr
+          volumeMounts:
+            -
+              mountPath: /var/lib/solr
+              name: solr-persistent-storage
+      priorityClassName: vip-essential
+      imagePullSecrets:
+        -
+          name: ecr-registry-pull
+      restartPolicy: Always
+      volumes:
+        -
+          name: solr-persistent-storage
+          persistentVolumeClaim:
+            claimName: drupal-solr-lib-unb-ca

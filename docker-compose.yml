@@ -1,0 +1,12 @@
+version: '3.6'
+
+services:
+  drupal.solr.lib.unb.ca:
+    build:
+      context: .
+    env_file:
+      - ./env/solr.env
+    restart: always
+    container_name: drupal.solr.lib.unb.ca
+    expose:
+      - "8983"

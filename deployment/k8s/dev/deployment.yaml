@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: solr
+    tier: search
+    appMajor: "8"
+    uri: dev-drupal.solr.lib.unb.ca
+  name: drupal-solr-lib-unb-ca
+  namespace: dev
+spec:
+  clusterIP: None
+  ports:
+    -
+      port: 8983
+  selector:
+    app: solr
+    uri: dev-drupal.solr.lib.unb.ca
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: solr
+    tier: search
+    appMajor: "8"
+    uri: dev-drupal.solr.lib.unb.ca
+  name: drupal-solr-lib-unb-ca
+  namespace: dev
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: solr
+        tier: search
+        appMajor: "8"
+        uri: dev-drupal.solr.lib.unb.ca
+    spec:
+      containers:
+        -
+          env:
+            -
+              name: SOLR_HOME
+              value: "/solr_home"
+#            -
+#              name: INIT_SOLR_HOME
+#              value: "yes"
+          image: solr:8.1
+          imagePullPolicy: Always
+          name: solr
+          ports:
+            -
+              containerPort: 8983
+              name: solr
+          volumeMounts:
+            -
+              mountPath: /solr_home
+              name: solr-persistent-storage
+      priorityClassName: dev-high-priority-services
+      restartPolicy: Always
+      volumes:
+        -
+          name: solr-persistent-storage
+          persistentVolumeClaim:
+            claimName: drupal-solr-lib-unb-ca
