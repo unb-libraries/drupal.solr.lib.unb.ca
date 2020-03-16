@@ -3,56 +3,59 @@ kind: Deployment
 metadata:
   labels:
     app: solr
-    appMajor: "5"
-    instance: drupal.solr.lib.unb.ca
-    tier: database
+    tier: search
+    appMajor: "8"
     uri: drupal.solr.lib.unb.ca
-    vcsOwner: unb-libraries
-    vcsRepository: solr.lib.unb.ca
-    vcsRef: prod
   name: drupal-solr-lib-unb-ca
   namespace: prod
 spec:
   replicas: 1
-  revisionHistoryLimit: 0
+  revisionHistoryLimit: 2
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
         app: solr
-        appMajor: "5"
-        instance: drupal.solr.lib.unb.ca
-        tier: database
+        tier: search
+        appMajor: "8"
         uri: drupal.solr.lib.unb.ca
-        vcsOwner: unb-libraries
-        vcsRepository: solr.lib.unb.ca
-        vcsRef: prod
-    spec:
       containers:
         -
+          name: drupal-solr-lib-unb-ca
+          readinessProbe:
+            tcpSocket:
+              port: 8983
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            periodSeconds: 30
+          livenessProbe:
+            tcpSocket:
+              port: 8983
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            periodSeconds: 30
           env:
             -
-              name: SOLR_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: solr
-                  key: root-password
+              name: SOLR_HOME
+              value: "/solr_home"
+          #            -
+          #              name: INIT_SOLR_HOME
+          #              value: "yes"
           image: "||DEPLOYMENTIMAGE||"
           imagePullPolicy: Always
-          name: drupal-solr-lib-unb-ca
           ports:
             -
               containerPort: 8983
               name: solr
           volumeMounts:
             -
-              mountPath: /var/lib/solr
+              mountPath: /solr_home
               name: solr-persistent-storage
-      priorityClassName: vip-essential
-      imagePullSecrets:
-        -
-          name: ecr-registry-pull
+      priorityClassName: vip-support
       restartPolicy: Always
       volumes:
         -
