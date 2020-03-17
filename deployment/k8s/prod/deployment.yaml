@@ -48,7 +48,6 @@ spec:
 #              value: "yes"
           image: "unblibraries/drupal.solr.lib.unb.ca:prod"
           imagePullPolicy: Always
-          name: solr
           ports:
             -
               containerPort: 8983
