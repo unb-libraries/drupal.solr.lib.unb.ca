@@ -23,6 +23,7 @@ spec:
         tier: search
         appMajor: "8"
         uri: drupal.solr.lib.unb.ca
+    spec:
       containers:
         -
           name: drupal-solr-lib-unb-ca
@@ -42,11 +43,12 @@ spec:
             -
               name: SOLR_HOME
               value: "/solr_home"
-          #            -
-          #              name: INIT_SOLR_HOME
-          #              value: "yes"
-          image: "||DEPLOYMENTIMAGE||"
+#            -
+#              name: INIT_SOLR_HOME
+#              value: "yes"
+          image: "unblibraries/drupal.solr.lib.unb.ca:prod"
           imagePullPolicy: Always
+          name: solr
           ports:
             -
               containerPort: 8983

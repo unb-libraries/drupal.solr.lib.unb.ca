@@ -23,6 +23,7 @@ spec:
         tier: search
         appMajor: "8"
         uri: dev-drupal.solr.lib.unb.ca
+    spec:
       containers:
         -
           name: drupal-solr-lib-unb-ca
