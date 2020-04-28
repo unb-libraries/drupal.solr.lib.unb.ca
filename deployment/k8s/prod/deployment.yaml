@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -9,6 +9,9 @@ metadata:
   name: drupal-solr-lib-unb-ca
   namespace: prod
 spec:
+  selector:
+    matchLabels:
+      uri: drupal.solr.lib.unb.ca
   replicas: 1
   revisionHistoryLimit: 2
   strategy:
@@ -46,7 +49,7 @@ spec:
 #            -
 #              name: INIT_SOLR_HOME
 #              value: "yes"
-          image: "unblibraries/drupal.solr.lib.unb.ca:prod"
+          image: "||DEPLOYMENTIMAGE||"
           imagePullPolicy: Always
           ports:
             -
