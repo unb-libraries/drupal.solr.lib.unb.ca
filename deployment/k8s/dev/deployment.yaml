@@ -27,6 +27,8 @@ spec:
         appMajor: "8"
         uri: dev-drupal.solr.lib.unb.ca
     spec:
+      nodeSelector:
+        deployenv: dev
       containers:
         -
           name: drupal-solr-lib-unb-ca
