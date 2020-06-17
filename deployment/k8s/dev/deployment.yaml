@@ -48,9 +48,9 @@ spec:
             -
               name: SOLR_HOME
               value: "/solr_home"
-#            -
-#              name: INIT_SOLR_HOME
-#              value: "yes"
+            -
+              name: SOLR_JAVA_MEM
+              value: "-Xms4g -Xmx4g"
           image: "||DEPLOYMENTIMAGE||"
           imagePullPolicy: Always
           ports:
