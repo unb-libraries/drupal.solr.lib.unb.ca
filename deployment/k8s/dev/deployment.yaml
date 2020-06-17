@@ -53,7 +53,7 @@ spec:
               value: "-Xms4g -Xmx4g"
             -
               name: SOLR_OPTS
-              value: "-Dsolr.lock.type=simple"
+              value: "-Dsolr.lock.type=none"
           image: "||DEPLOYMENTIMAGE||"
           imagePullPolicy: Always
           ports:
