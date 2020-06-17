@@ -51,6 +51,9 @@ spec:
             -
               name: SOLR_JAVA_MEM
               value: "-Xms4g -Xmx4g"
+            -
+              name: SOLR_OPTS
+              value: "-Dsolr.lock.type=simple"
           image: "||DEPLOYMENTIMAGE||"
           imagePullPolicy: Always
           ports:
