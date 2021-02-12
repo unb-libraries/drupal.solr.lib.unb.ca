@@ -19,4 +19,4 @@ dockworker:
       - prod
     name: unblibraries/drupal.solr.lib.unb.ca
     date_tag_image: true
-    repository: dockercloud
+    repository: ghcr
