@@ -10,7 +10,7 @@
     }
   },
   "require-dev": {
-    "unb-libraries/dockworker-solr": "~3"
+    "unb-libraries/dockworker-solr": "~4"
   },
   "scripts": {
     "post-update-cmd": [
