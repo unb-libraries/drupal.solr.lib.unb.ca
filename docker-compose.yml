@@ -8,3 +8,7 @@ services:
     container_name: drupal.solr.lib.unb.ca
     expose:
       - "8983"
+    volumes:
+      - solr-data:/opt/solr/server/solr/mycores
+volumes:
+  solr-data:
