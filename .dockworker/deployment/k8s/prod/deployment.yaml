@@ -28,7 +28,7 @@ spec:
         uri: drupal.solr.lib.unb.ca
     spec:
       nodeSelector:
-        deployenv: prod
+        deploy_prod: 'true'
       containers:
         -
           name: drupal-solr-lib-unb-ca
