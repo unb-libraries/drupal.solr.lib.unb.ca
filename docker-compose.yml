@@ -1,13 +1,15 @@
 services:
-  drupal.solr.lib.unb.ca:
+  drupal-solr-lib-unb-ca:
     build:
       context: .
     env_file:
       - ./env/solr.env
     restart: unless-stopped
-    container_name: drupal.solr.lib.unb.ca
+    container_name: drupal-solr-lib-unb-ca
     expose:
       - "8983"
+    ports:
+      - "3500:8983"
     volumes:
       - solr-data:/opt/solr/server/solr/mycores
 volumes:
