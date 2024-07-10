@@ -1,5 +1,7 @@
 FROM solr:8.4
 
+ENV TZ America/Moncton
+
 LABEL ca.unb.lib.generator="solr" \
   com.microscaling.docker.dockerfile="/Dockerfile" \
   com.microscaling.license="MIT" \
@@ -13,5 +15,3 @@ LABEL ca.unb.lib.generator="solr" \
   org.label-schema.version=$VERSION \
   org.opencontainers.image.authors="libsupport@unb.ca" \
   org.opencontainers.image.source="https://github.com/unb-libraries/drupal.solr.lib.unb.ca"
-
-ENV TZ America/Moncton
