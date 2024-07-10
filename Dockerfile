@@ -1,5 +1,4 @@
 FROM solr:8.4
-MAINTAINER UNB Libraries <libsupport@unb.ca>
 
 LABEL ca.unb.lib.generator="solr" \
   com.microscaling.docker.dockerfile="/Dockerfile" \
@@ -12,6 +11,7 @@ LABEL ca.unb.lib.generator="solr" \
   org.label-schema.vcs-url="https://github.com/unb-libraries/drupal.solr.lib.unb.ca" \
   org.label-schema.vendor="University of New Brunswick Libraries" \
   org.label-schema.version=$VERSION \
+  org.opencontainers.image.authors="libsupport@unb.ca" \
   org.opencontainers.image.source="https://github.com/unb-libraries/drupal.solr.lib.unb.ca"
 
 ENV TZ America/Moncton
