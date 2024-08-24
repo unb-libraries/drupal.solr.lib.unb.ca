@@ -1,6 +1,6 @@
 FROM solr:8.4
 
-ENV TZ America/Moncton
+ENV TZ="America/Moncton"
 
 LABEL ca.unb.lib.generator="solr" \
   com.microscaling.docker.dockerfile="/Dockerfile" \
