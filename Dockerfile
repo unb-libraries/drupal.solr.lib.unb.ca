@@ -2,6 +2,11 @@ FROM solr:8.4
 
 ENV TZ="America/Moncton"
 
+# Silence the verbose logging.
+USER root
+RUN sed -i 's/<Root level="info">/<Root level="error">/' /opt/solr/server/resources/log4j2.xml
+USER $SOLR_UID
+
 LABEL ca.unb.lib.generator="solr" \
   com.microscaling.docker.dockerfile="/Dockerfile" \
   com.microscaling.license="MIT" \
