@@ -1,6 +1,6 @@
 #!/bin/bash
 LOG_LEVEL=${1:-"warn"}
-CONFIG_FILE="log4j2.xml"
+CONFIG_FILE="/opt/solr/server/resources/log4j2.xml"
 TEMP_FILE="${CONFIG_FILE}.tmp"
 
 sed -i "s/<Root level=\"info\">/<Root level=\"$LOG_LEVEL\">/" "$CONFIG_FILE"
