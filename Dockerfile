@@ -3,8 +3,10 @@ FROM solr:8.4
 ENV TZ="America/Moncton"
 ENV SOLR_LOG_LEVEL="warn"
 
+USER root
 COPY ./build/ /build/
 RUN /build/scripts/container/setSolrLogLevels.sh ${SOLR_LOG_LEVEL}
+USER $SOLR_UID
 
 LABEL ca.unb.lib.generator="solr" \
   com.microscaling.docker.dockerfile="/Dockerfile" \
