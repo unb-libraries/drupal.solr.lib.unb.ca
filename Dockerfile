@@ -1,12 +1,10 @@
 FROM solr:8.4
 
 ENV TZ="America/Moncton"
+ENV SOLR_LOG_LEVEL="warn"
 
-# Silence the verbose logging.
-USER root
-RUN sed -i 's/<Root level="info">/<Root level="warn">/' /opt/solr/server/resources/log4j2.xml
-RUN sed -i 's/<AsyncRoot level="info">/<AsyncRoot level="warn">/' /opt/solr/server/resources/log4j2.xml
-USER $SOLR_UID
+COPY ./build/ /build/
+RUN /build/scripts/container/setSolrLogLevels.sh ${SOLR_LOG_LEVEL}
 
 LABEL ca.unb.lib.generator="solr" \
   com.microscaling.docker.dockerfile="/Dockerfile" \
