@@ -4,7 +4,8 @@ ENV TZ="America/Moncton"
 
 # Silence the verbose logging.
 USER root
-RUN sed -i 's/<Root level="info">/<Root level="error">/' /opt/solr/server/resources/log4j2.xml
+RUN sed -i 's/<Root level="info">/<Root level="warn">/' /opt/solr/server/resources/log4j2.xml
+RUN sed -i 's/<AsyncRoot level="info">/<AsyncRoot level="warn">/' /opt/solr/server/resources/log4j2.xml
 USER $SOLR_UID
 
 LABEL ca.unb.lib.generator="solr" \
